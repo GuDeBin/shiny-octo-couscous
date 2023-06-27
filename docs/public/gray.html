@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>如何在网页置灰的时候，部分元素保持彩色-有意思的面试题</title>
+
+
+  <style>
+/* html {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+html::before {
+    content: "";
+    position: absolute;
+    backdrop-filter: grayscale(100%);
+    pointer-events: none;
+    inset: 0;
+    z-index: 100;
+} */
+    .btn {
+      margin:10px;
+      padding: 5px 8px;
+      color: white;
+      background: #42b883;
+      border: 1px solid #42b883;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .item{
+      display:inline-block;
+      width:180px;
+      height:180px;
+      border-radius: 10px;
+      margin:10px;
+      background: #42b883;
+    }
+    .app{
+      display: flex;
+    }
+    .footer{
+      width:600px;
+      height:150px;
+      background: #42b883;
+      margin:10px;
+    }
+    .sidebar{
+      flex:1;
+    }
+    .content{
+      flex:4;
+    }
+  
+
+  </style>
+</head>
+
+<body>
+  <a style="display: block;width: 100px;font-size:24px;margin: 0 10px;color:#42b883;"   target="_blank" href="https://shengxinjing.cn/about.html">
+    联系作者
+  </a>
+  <div>
+    <button class="btn" id="set-gray-all">全部置灰</button>
+    <button class="btn" id="set-gray-first">首屏置灰</button>
+    <button class="btn" id="set-gray">部分置灰</button>
+  </div>
+  <hr>
+
+  <div class="app">
+    <div class="sidebar">
+      <div class="title"></div>
+      <div class="content">
+        <div class="item"></div>
+        <img height="200px"  class="not-gray3" src="https://cdn.jsdelivr.net/gh/shengxinjing/static/design.png" alt="">
+        <div class="item">
+          <input type="text">
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="page">
+        <div class="item"></div>
+        <div class="item not-gray3 not-gray">
+        </div>
+      </div>
+      <div class="page">
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+
+      <div class="page">
+        <button class="btn">按钮3</button>
+      </div>
+    </div>
+    </div>
+    <div class="item" id="not-gray2">
+      <video src="/ikun/ikun.mp4"  height="280px" controls></video>
+    </div>
+    <div class="footer"></div>
+    <div class="footer"></div>
+    <div class="footer"></div>
+    <div class="footer"></div>
+  </div>
+
+
+  <script>
+    let style = document.createElement('style')
+    let graySelector = 'gray-filter'
+    style.setAttribute('type', 'text/css')
+    style.textContent = `.${graySelector}{
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: gray;
+  filter: progid:dximagetransform.microsoft.basicimage(grayscale=1);
+}
+.gray-first {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.gray-first::before {
+    content: "";
+    position: absolute;
+    backdrop-filter: grayscale(100%);
+    pointer-events: none;
+    inset: 0;
+    z-index: 100;
+} 
+.not-gray{
+  position: relative;
+  z-index:1000;
+}
+`
+    document.head.appendChild(style)
+
+    let root = document.querySelector('html')
+    let btn = document.querySelector('#set-gray')
+let btnFirst = document.querySelector('#set-gray-first')
+let btnAll = document.querySelector('#set-gray-all')
+
+    btnAll && btnAll.addEventListener('click', () => {
+  setAllGray()
+}, false)
+btn && btn.addEventListener('click', () => {
+  setGray()
+}, false)
+btnFirst && btnFirst.addEventListener('click', () => {
+  toggleClassName(root,'gray-first' )
+}, false)
+
+
+    function toggleClassName(el,name){
+      if (el.className.indexOf(name) > -1) {
+        el.className = el.className.replace(name, '').trim()
+      } else {
+        el.className = [el.className, name].join(' ')
+      }
+    }
+
+    function setAllGray() {
+      toggleClassName(root,graySelector)
+    }
+    function setGray() {
+      let body = document.body
+      let selectors = ['#not-gray2', '.not-gray3']
+      // let selectors = ['.banner-block']
+      selectors.forEach(selector=>{
+        let doms = [...document.querySelectorAll(selector)].forEach(v=>{
+          if(!v) return 
+
+          v.staycolor = true
+          let parent = v.parentNode
+          while(parent && !parent.colorful){
+            parent.colorful = true
+            parent = parent.parentNode
+          }
+        })
+      })
+      walk(body)
+      function walk(node){
+        if(node.nodeType!==1) return 
+        if(node.staycolor) return 
+        if(!node.colorful){
+          toggleClassName(node,graySelector)
+          return
+        }
+        for (var i = 0; i < node.children.length; i++) {  
+          var child = node.children[i]; 
+          walk(child)
+        }  
+      }
+    }
+
+
+  </script>
+
+</body>
+
+</html>
