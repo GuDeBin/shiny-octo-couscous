@@ -50,3 +50,13 @@ jobs:
           port: 22
           source: "public/"
           target: ${{ secrets.REMOTE_TARGET }}
+      - name: 使用ssh执行命令
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          # password: ${{ secrets.REMOTE_PASS }}
+          key: ${{ secrets.REMOTE_KEY }}
+          port: 22
+          # 将public文件内容复制到上级目录
+          script: cp -r public/* ../
