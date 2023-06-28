@@ -59,4 +59,8 @@ jobs:
           key: ${{ secrets.REMOTE_KEY }}
           port: 22
           # 将public文件内容复制到上级目录
-          script: cp -r public/* ../
+          script: |
+            cd ${{ secrets.REMOTE_TARGET }}
+            cp -r public/* ./
+            rm -rf public
+            exit
