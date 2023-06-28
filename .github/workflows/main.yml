@@ -45,7 +45,8 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.REMOTE_PASS }}
+          # password: ${{ secrets.REMOTE_PASS }}
+          key: ${{ secrets.REMOTE_KEY }}
           port: 22
-          source: "public/*"
+          source: "public/"
           target: ${{ secrets.REMOTE_TARGET }}
