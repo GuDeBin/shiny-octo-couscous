@@ -64,7 +64,8 @@ jobs:
           # password: ${{ secrets.REMOTE_PASS }}
           key: ${{ secrets.REMOTE_KEY }}
           port: 22
-          source: "public/, docker-compose.yml, Dockerfile"
+          # 上传多个文件
+          source: "public/ docker-compose.yml Dockerfile"
           target: ${{ secrets.REMOTE_TARGET }}
       - name: 使用ssh执行命令
         uses: appleboy/ssh-action@master
@@ -77,8 +78,8 @@ jobs:
           # 构建镜像
           script: |
             cd ${{ secrets.REMOTE_TARGET }}
-            docker-compose down
-            docker-compose build
-            docker-compose up -d
+            docker compose down
+            docker compose build
+            docker compose up -d
             rm -rf public
             exit
