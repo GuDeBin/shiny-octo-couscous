@@ -65,7 +65,7 @@ jobs:
           key: ${{ secrets.REMOTE_KEY }}
           port: 22
           # 上传多个文件
-          source: "public/ docker-compose.yml Dockerfile"
+          source: "public/*,docker-compose.yml,Dockerfile"
           target: ${{ secrets.REMOTE_TARGET }}
       - name: 使用ssh执行命令
         uses: appleboy/ssh-action@master
