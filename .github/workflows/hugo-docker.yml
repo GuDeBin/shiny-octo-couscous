@@ -62,7 +62,6 @@ jobs:
           mv public build
           cp Dockerfile build
           cp docker-compose.yaml build
-          cp default.conf build
       - name: 上传
         uses: appleboy/scp-action@master
         with:
