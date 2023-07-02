@@ -55,7 +55,7 @@ jobs:
         run: |
           hugo \
             --gc \
-            --minify
+            --minify \
             --baseURL "gudebin.top"
       - name: 设置工作目录
         run: |
