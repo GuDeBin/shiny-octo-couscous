@@ -56,7 +56,6 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --baseURL "gudebin.top"
       - name: 设置工作目录
         run: |
           mkdir build
@@ -89,4 +88,5 @@ jobs:
             docker compose down
             docker compose build
             docker compose up -d
+            rm -rf ${{ secrets.REMOTE_TARGET }}/build
             exit
