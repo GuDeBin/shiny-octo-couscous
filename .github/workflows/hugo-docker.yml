@@ -56,6 +56,14 @@ jobs:
           hugo \
             --gc \
             --minify
+            --baseURL "gudebin.top"
+      - name: 设置工作目录
+        run: |
+          mkdir build
+          mv public build
+          cp Dockerfile build
+          cp docker-compose.yml build
+          cp default.conf build
       - name: 上传
         uses: appleboy/scp-action@master
         with:
@@ -65,7 +73,7 @@ jobs:
           key: ${{ secrets.REMOTE_KEY }}
           port: 22
           # 上传多个文件
-          source: "public/*,docker-compose.yml,Dockerfile"
+          source: "build/*"
           target: ${{ secrets.REMOTE_TARGET }}
       - name: 使用ssh执行命令
         uses: appleboy/ssh-action@master
@@ -77,9 +85,8 @@ jobs:
           port: 22
           # 构建镜像
           script: |
-            cd ${{ secrets.REMOTE_TARGET }}
+            cd ${{ secrets.REMOTE_TARGET }}/build
             docker compose down
             docker compose build
             docker compose up -d
-            rm -rf public
             exit
