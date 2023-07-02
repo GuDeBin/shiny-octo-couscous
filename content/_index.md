@@ -1,21 +1,19 @@
-# A match made in heaven
+## Hey, 我是 gdb
 
-There is a website obesity crisis. Bloated websites full of scripts, ads, and trackers are slowing your readers down every time they try to read your well-crafted content.
+你好。。。
 
-Hugo Bear Blog is all you need to build a fantastic and optimized site or blog. It works perfectly on **any** viewing device. All you need to focus on is writing good content.
+好吧，我突然觉得我好像也没什么需要介绍的
 
-[Go to the original bear blog](https://bearblog.dev/).
-
----
-
-What happens when you combine the worlds' fastest, most lightweight static site generator with a design theme built to provide you with free, no-nonsense, super-fast blogging capabilities?
-
-**Use this theme, and find out!**
-
-Made with 💟 by [Jan Raasch](https://www.janraasch.com).
+这里是我 blog，也是我折腾的产物，我想在这里留下些有意义的东西，文章、项目，或者是我的奇思妙想（脑洞大开）
 
 ---
 
-Simply publish content online, grow an audience, and keep your pages tiny, fast, and **optimized for search engines**.
+当你把世界上最快、最轻量级的静态网站生成器和一个设计主题结合起来，为你提供免费、简洁、超快的博客功能时，会发生什么?
 
-Each page is ~5kb, and you can **host your blog yourself**.
+**使用这个主题，找出答案吧!**
+
+由[Jan Raasch](https://www.janraasch.com)制作。
+
+感谢作者提供这么美好的且符合我想法的主题
+
+---

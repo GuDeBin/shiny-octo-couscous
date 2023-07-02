@@ -1,6 +1,7 @@
 version: "3"
 services:
   nginx:
+    image: my-blog:latest
     build:
       context: .
       dockerfile: Dockerfile
