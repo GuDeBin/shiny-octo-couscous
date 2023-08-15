@@ -52,4 +52,4 @@ ignoreErrors = ["error-disable-taxonomy"]
   # dateFormat = "2006-01-02"
 
   # 备案
-  # hideMadeWithLineBlank = true
+  hideMadeWithLineBlank = true
